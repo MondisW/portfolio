@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Me & Portfolio</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap');
+
+    :root {
+        --neon-green: #00ff00;
+        --neon-blue: #00d9ff;
+        --neon-purple: #c300ff;
+        --dim-green: #66ff66;
+        --bg-black: #000000;
+        --bg-terminal: #0a0a0a;
+    }
+
+    body {
+        font-family: 'Fira Code', monospace;
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-black);
+        color: var(--neon-green);
+    }
+
+    header {
+        background-color: var(--bg-black);
+        color: var(--neon-green);
+        padding: 20px;
+        text-align: center;
+        border-bottom: 2px solid var(--neon-green);
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        color: var(--neon-purple);
+    }
+
+    header p {
+        color: var(--neon-blue);
+        font-size: 1.1em;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        background-color: var(--bg-terminal);
+        border-bottom: 1px solid var(--neon-green);
+    }
+
+    nav a {
+        color: var(--neon-green);
+        text-decoration: none;
+        padding: 12px 18px;
+        display: block;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+    }
+
+    nav a:hover {
+        color: var(--neon-purple);
+        background-color: black;
+        transform: scale(1.05);
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    .about, .portfolio, .contact {
+        margin: 30px auto;
+        max-width: 850px;
+        background: var(--bg-terminal);
+        border: 2px solid var(--neon-green);
+        border-radius: 10px;
+        color: var(--dim-green);
+        padding: 25px;
+        box-shadow: 0 0 10px var(--neon-green);
+        position: relative;
+    }
+
+
+    .about h2.prompt,
+    .portfolio h2.prompt,
+    .contact h2.prompt,
+    .socials h2.prompt {
+        color: var(--neon-blue);
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        animation: glow-text 2s ease-in-out infinite alternate;
+        text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-green);
+    }
+
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .portfolio-item {
+        background: black;
+        border: 1px solid var(--neon-purple);
+        border-radius: 8px;
+        padding: 15px;
+        color: var(--neon-green);
+        transition: border-color 0.3s;
+    }
+
+    .portfolio-item:hover {
+        border-color: var(--neon-blue);
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px;
+        background-color: black;
+        color: var(--dim-green);
+        border-top: 1px solid var(--neon-green);
+        font-size: 0.9em;
+    }
+
+    footer a {
+        color: var(--neon-purple);
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    footer a:hover {
+        color: var(--neon-blue);
+        text-decoration: underline;
+    }
+
+    .blinking-cursor::after {
+        content: '|';
+        animation: blink 1s infinite;
+        color: var(--neon-green);
+        font-weight: bold;
+    }
+
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        50.01%, 100% { opacity: 0; }
+    }
+
+    @keyframes pulse-border {
+        0% {
+            box-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-purple);
+        }
+        50% {
+            box-shadow: 0 0 10px var(--neon-blue), 0 0 15px var(--neon-green);
+        }
+        100% {
+            box-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-blue);
+        }
+    }
+
+    .about, .portfolio, .contact, .socials {
+        animation: pulse-border 4s infinite;
+    }
+
+    .social-links a,
+    nav a {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .social-links a::before,
+    nav a::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, var(--neon-blue), var(--neon-purple), var(--neon-green));
+        opacity: 0.15;
+        transform: rotate(0deg);
+        animation: link-glow 4s linear infinite;
+        z-index: -1;
+    }
+
+    @keyframes link-glow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+
+    @keyframes glow-text {
+        from {
+            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-green);
+        }
+        to {
+            text-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-blue);
+        }
+    }
+
+    .prompt::after {
+        content: '_';
+        margin-left: 5px;
+        font-weight: bold;
+        animation: cursor-glow 1.5s infinite;
+        color: var(--neon-green);
+    }
+
+    @keyframes cursor-glow {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+    .socials {
+    margin: 30px auto;
+    max-width: 850px;
+    background: var(--bg-terminal);
+    border: 2px solid var(--neon-green);
+    border-radius: 10px;
+    color: var(--dim-green);
+    padding: 25px;
+    box-shadow: 0 0 10px var(--neon-green);
+    position: relative;
+    animation: pulse-border 4s infinite;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.social-icon {
+    color: var(--neon-green);
+    filter: drop-shadow(0 0 5px var(--neon-green));
+    transition: color 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+}
+
+.social-icon svg {
+    width: 36px;
+    height: 36px;
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+
+.social-icon:hover {
+    animation: pulse-glow 2s infinite;
+    color: var(--neon-blue);
+    filter:
+        drop-shadow(0 0 12px var(--neon-blue))
+        drop-shadow(0 0 20px var(--neon-purple));
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        filter:
+            drop-shadow(0 0 12px var(--neon-blue))
+            drop-shadow(0 0 20px var(--neon-purple));
+    }
+    50% {
+        filter:
+            drop-shadow(0 0 20px var(--neon-purple))
+            drop-shadow(0 0 12px var(--neon-blue));
+    }
+}
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+
+.loader-text {
+    color: var(--neon-green);
+    font-family: 'Fira Code', monospace;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+
+.loader-text .dot {
+    opacity: 0;
+    animation: blinkDots 1.5s infinite;
+}
+
+.loader-text .dot:nth-child(3) { animation-delay: 0.2s; }
+.loader-text .dot:nth-child(4) { animation-delay: 0.4s; }
+.loader-text .dot:nth-child(5) { animation-delay: 0.6s; }
+
+@keyframes blinkDots {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+</style>
+</head>
+<body>
+<div id="loader">
+    <div class="loader-text">
+        <span class="prompt">user@portfolio:~$</span>
+        <span>Loading</span><span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+    </div>
+</div>
+
+    <header>
+        <section id="top"></section>
+        <h1>Welcome to My Portfolio</h1>
+        <p>Discover more about me and my work!</p>
+    </header>
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+        <a href="#socials">Socials</a>
+    </nav>
+    <section id="about" class="about">
+        <h2 class="prompt">user@about_me:~$</h2>
+        <p>Your Info</p>
+    </section>
+    <section id="portfolio" class="portfolio">
+        <h2 class="prompt">user@portfolio:~$</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <h3>Project 1</h3>
+                <p>A brief description of your project.</p>
+            </div>
+            <div class="portfolio-item">
+                <h3>Project 2</h3>
+                <p>A brief description of your project.</p>
+            </div>
+            <div class="portfolio-item">
+                <h3>Project 3</h3>
+                <p>A brief description of your project.</p>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <h2 class="prompt">user@contact:~$</h2>
+        <p>Feel free to reach out to me!</p>
+        <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+        <p>Phone: +123 456 7890</p>
+    </section>
+    <section id="socials" class="socials">
+    <h2 class="prompt">user@socials:~$</h2>
+    <div class="social-links">
+        <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub" class="social-icon github">
+            <!-- GitHub SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="36" height="36">
+                <path d="M12 0.297C5.372 0.297 0 5.67 0 12.297c0 5.297 3.438 9.8 8.207 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.727-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.838 1.238 1.838 1.238 1.07 1.835 2.807 1.305 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.466-1.337-5.466-5.945 0-1.313.47-2.388 1.235-3.23-.123-.303-.535-1.523.117-3.176 0 0 1.007-.322 3.3 1.23a11.5 11.5 0 013.003-.404c1.018.005 2.045.138 3.003.404 2.29-1.552 3.295-1.23 3.295-1.23.655 1.653.244 2.873.12 3.176.77.842 1.233 1.917 1.233 3.23 0 4.62-2.807 5.642-5.48 5.937.43.37.815 1.1.815 2.222 0 1.606-.015 2.898-.015 3.293 0 .32.215.694.825.576C20.565 22.09 24 17.59 24 12.297c0-6.628-5.373-12-12-12"/>
+            </svg>
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn" class="social-icon linkedin">
+            <!-- LinkedIn SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="36" height="36">
+                <path d="M22.225 0H1.771C.792 0 0 .774 0 1.728v20.543C0 23.226.792 24 1.77 24h20.451c.978 0 1.779-.774 1.779-1.729V1.728C24 .774 23.204 0 22.225 0zM7.07 20.452H3.56V9h3.507v11.452zM5.316 7.508a2.034 2.034 0 110-4.067 2.034 2.034 0 010 4.067zm15.136 12.945h-3.507v-5.558c0-1.325-.025-3.031-1.848-3.031-1.85 0-2.133 1.445-2.133 2.939v5.65h-3.507V9h3.368v1.561h.047c.47-.89 1.616-1.83 3.33-1.83 3.562 0 4.22 2.346 4.22 5.397v6.344z"/>
+            </svg>
+        </a>
+        <a href="https://twitter.com/yourusername" target="_blank" aria-label="Twitter" class="social-icon twitter">
+            <!-- Twitter SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="36" height="36">
+                <path d="M23.954 4.569c-.885.392-1.83.656-2.825.775a4.932 4.932 0 002.163-2.724 9.862 9.862 0 01-3.127 1.197 4.917 4.917 0 00-8.38 4.482c-4.083-.2-7.702-2.159-10.126-5.134a4.822 4.822 0 00-.665 2.475c0 1.71.87 3.214 2.188 4.099a4.903 4.903 0 01-2.228-.616c-.054 2.28 1.581 4.415 3.949 4.89a4.935 4.935 0 01-2.224.084c.623 1.943 2.432 3.36 4.576 3.4a9.868 9.868 0 01-6.102 2.102c-.395 0-.787-.023-1.174-.068a13.978 13.978 0 007.557 2.213c9.054 0 14.004-7.496 14.004-13.986 0-.21 0-.423-.015-.633a9.936 9.936 0 002.457-2.548l-.047-.02z"/>
+            </svg>
+        </a>
+        <a href="https://instagram.com/yourusername" target="_blank" aria-label="Instagram" class="social-icon instagram">
+            <!-- Instagram SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="36" height="36">
+                <path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm0 2h8.5A3.75 3.75 0 0120 7.75v8.5a3.75 3.75 0 01-3.75 3.75h-8.5A3.75 3.75 0 014 16.25v-8.5A3.75 3.75 0 017.75 4zm8.5 1.5a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0zM12 7a5 5 0 100 10 5 5 0 000-10z"/>
+            </svg>
+        </a>
+    </div>
+</section>
+
+    <footer>
+        <p>&copy; 2025 [Your Name]. All rights reserved. | <a href="#top">Back to top</a></p>
+    </footer>
+    <script>
+    window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        loader.style.transition = 'opacity 1.15s ease';
+        loader.style.opacity = 0;
+        setTimeout(() => loader.style.display = 'none', 500);
+    });
+</script>
+
+</body>
+</html>
